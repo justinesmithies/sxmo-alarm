@@ -1,0 +1,183 @@
+#!/bin/sh
+#
+# Build and install git version of SXMO onto an Arch Arm barebones image.
+# If run again it can be used to update the SXMO git packages and rebuild them without
+# reinstalling everything else.
+#
+# To install and run:
+# Copy sxmo-alarm somewhere in either the root of your home directory 
+# or some other directory under your home on your Pinephone and
+# chmod +x sxmo-alarm
+# sudo ./sxmo-alarm from the directory that you installed it.
+#
+# Justine Smithies - 27-02-2021
+
+if ! [ $(id -u) = 0 ]; then
+   echo "The script needs to be run as root." >&2
+   exit 1
+fi
+
+if [ $SUDO_USER ]; then
+    real_user=$SUDO_USER
+else
+    real_user=$(whoami)
+fi
+
+# Commands that you don't want running as root would be invoked
+# with: sudo -u $real_user
+# So they will be run as the user who invoked the sudo command
+# Keep in mind if the user is using a root shell (they're logged in as root),
+# then $real_user is actually root
+# sudo -u $real_user non-root-command
+
+# Commands that need to be ran with root would be invoked without sudo
+# root-command
+
+sudo -u alarm mkdir -p build-sxmo-dev || exit 1
+
+cd build-sxmo-dev || exit 1
+
+echo "Updating Arch Arm.">&2
+
+pacman -Syu --noconfirm
+
+echo "Installing build dependencies.">&2
+
+pacman -S --needed --noconfirm --disable-download-timeout xorg-server libxft libxinerama webkit2gtk linux-headers fontconfig freetype2 libxext libinput ncurses base-devel git bc busybox
+pacman -S --needed --noconfirm --disable-download-timeout xcalib xorg-xrandr xorg-xsetroot xorg-xdm xorg-xmodmap xorg-xset xorg-xprop xdotool xsel xorg-xinput xorg-xcalc xclip xf86-input-synaptics xf86-video-fbdev
+pacman -S --needed --noconfirm --disable-download-timeout ttf-dejavu alsa-utils autocutsel inotify-tools sxiv vis pulseaudio pulseaudio-alsa conky megapixels feh dunst modemmanager ffmpeg geoclue mediainfo
+pacman -S --needed --noconfirm --disable-download-timeout firefox terminus-font highlight xcursor-themes youtube-dl screen mpv dnsmasq
+
+# Build and install yay from AUR
+
+if pacman -Qs yay ; then
+	echo "Yay is already installed.">&2
+else
+	echo "Installing yay.">&2
+	sudo -u alarm git clone https://aur.archlinux.org/yay-bin.git
+	cd yay-bin
+	sudo -u alarm makepkg -s --noconfirm
+	pacman -U --noconfirm yay-bin-*
+	cd ..
+fi
+
+# Install Nerd fonts from AUR
+
+echo "Installing Nerd fonts.">&2
+if pacman -Qs nerd-fonts-hack ; then
+	echo "Nerd fonts is already installed.">&2
+else
+	sudo -u alarm git clone https://aur.archlinux.org/nerd-fonts-hack.git
+	cd nerd-fonts-hack
+	sudo -u alarm makepkg -s --noconfirm
+	pacman -U --noconfirm nerd-fonts-hack-*
+	cd ..
+fi
+
+# Install sfeed from AUR
+
+echo "Installing sfeed.">&2
+if pacman -Qs sfeed ; then
+	echo "Sfeed is already installed.">&2
+else
+	sudo -u alarm git clone https://aur.archlinux.org/sfeed-git.git
+	cd sfeed-git
+	sed -i "s@arch=('i686' 'x86_64' 'armv6h' 'armv7h')@arch=('i686' 'x86_64' 'armv6h' 'armv7h' 'aarch64')@g" PKGBUILD
+	sudo -u alarm makepkg -s --noconfirm
+	pacman -U --noconfirm --overwrite="*" sfeed-git-*
+	cd ..
+fi
+
+# Copy in essential files for Arch Arm build
+
+# Create sxmo-pinephone.service
+
+if [ ! -f /etc/systemd/system/sxmo-pinephone.service ]; then
+    cat > "/etc/systemd/system/sxmo-pinephone.service" <<EOF
+[Unit]
+Description=sxmo-pinephone
+
+[Service]
+ExecStart=/usr/bin/chmod -R a+rw /sys/module/8723cs/parameters/rtw_scan_interval_thr /sys/devices/platform/backlight/backlight/backlight/brightness /sys/power/state /sys/devices/platform/soc/1f00000.rtc/power/wakeup /sys/power/mem_sleep /sys/bus/usb/drivers/usb/unbind /sys/bus/usb/drivers/usb/bind /sys/class/leds/red:indicator/brightness /sys/class/leds/blue:indicator/brightness /sys/class/leds/green:indicator/brightness /sys/class/leds/white:flash/brightness /dev/rtc0 /sys/devices/platform/soc/1f03400.rsb/sunxi-rsb-3a3/axp221-pek/power/wakeup /sys/class/wakeup/
+
+[Install]
+WantedBy=multi-user.target
+EOF
+fi
+
+# For audio to work
+
+if [ ! -f /etc/asound.conf ]; then
+     cat > "/etc/asound.conf" <<EOF
+pcm.!default {
+    type hw
+    card 0
+}
+
+ctl.!default {
+    type hw
+    card 0
+}
+EOF
+fi
+
+# Fetch and build required SXMO packages
+
+repos="~mil/sxmo-utils ~mil/sxmo-dwm ~mil/sxmo-dmenu ~mil/lisgd ~mil/sxmo-surf ~mil/sxmo-st ~proycon/svkbd ~mil/sxmo-xdm-config"
+
+for repo in $repos; do
+	echo "Obtaining $repo...">&2
+	repodir="$(basename "$repo")"
+	if [ -d "$repodir" ]; then
+		cd "$repodir" || exit 1
+		git pull --ff-only || exit 1
+	else
+		git clone "https://git.sr.ht/$repo" || exit 1
+		cd "$repodir" || exit 1
+	fi
+	echo "Building $repo...">&2
+	make clean
+	if [ -f config.def.h ] && [ -f config.h ]; then
+		cp -f config.def.h config.h
+	fi
+	sudo make PREFIX=/usr install || exit 1
+	if [ "$repo" = "~mil/sxmo-utils" ]; then
+        systemctl enable sxmo-pinephone.service
+	elif [ "$repo" = "~mil/sxmo-xdm-config" ]; then
+		if systemctl is-active --quiet xdm.service; then
+           echo "XDM Service is already running.">&2
+        else
+           echo "Enabling XDM Service.">&2
+           systemctl enable xdm.service
+        fi
+		
+	fi
+	cd .. || exit 1
+done
+
+cd .. || exit 1
+
+# Move config files into correct directories for Arch Arm
+
+cp /usr/lib/X11/xdm/Xsession /etc/X11/xdm/
+cp /usr/lib/X11/xdm/Xsetup_0 /etc/X11/xdm/
+cp /usr/lib/X11/xdm/GiveConsole /etc/X11/xdm/
+
+# Housekeeping
+
+sed -i "s/#HandlePowerKey=poweroff/HandlePowerKey=ignore/" /etc/systemd/logind.conf
+systemctl enable ModemManager
+
+# E.g. hide the cursor for Xorg
+
+sed -i 's@:0 local /usr/bin/X :0  -nolisten tcp@:0 local /usr/bin/X -nolisten tcp -nocursor :0@g' /etc/X11/xdm/Xservers
+
+# Fix upgrade menu to use yay
+
+sed -i 's@echo "Updating all packages from repositories"@@g' /usr/bin/sxmo_upgrade.sh
+sed -i 's@sudo apk update@@g' /usr/bin/sxmo_upgrade.sh
+sed -i 's@sudo apk upgrade@yay -Syu@g' /usr/bin/sxmo_upgrade.sh
+
+echo "Finished please reboot your Pinephone.">&2
+exit 0
+
