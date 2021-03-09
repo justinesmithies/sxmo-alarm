@@ -4,7 +4,7 @@ If this script helps you then please consider buying me a coffee or two ;)
 
 [Buy me a coffee](https://paypal.me/JustineSmithies?locale.x=en_GB)
 
-<a href="https://www.buymeacoffee.com/JustineSmithies" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+<a href="https://www.buymeacoffee.com/JustineSmithies" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 30px !important;width: 100px !important;" ></a>
 
 ## To install and run:
 
