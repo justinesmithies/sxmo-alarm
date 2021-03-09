@@ -4,7 +4,7 @@ If this script helps you then please consider buying me a coffee or two ;)
 
 https://paypal.me/JustineSmithies?locale.x=en_GB
 
-[Buy me a coffe]https://paypal.me/JustineSmithies?locale.x=en_GB
+[fork my repository](https://github.com/user/repository/fork)
 
 ## To install and run:
 
