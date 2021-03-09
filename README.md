@@ -2,7 +2,7 @@
 Script to install [sxmo](https://sr.ht/~mil/Sxmo/) onto an Arch Arm barebones image. 
 If this script helps you then please consider buying me a coffee or two ;)
 
-[Buy me a coffee](https://www.buymeacoffee.com/JustineSmithies)
+<a href="https://www.buymeacoffee.com/JustineSmithies" target="_blank">Buy me a coffee</a> 
 
 ## To install and run:
 
