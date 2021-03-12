@@ -1,5 +1,5 @@
 # sxmo-alarm
-Script to install [sxmo](https://sr.ht/~mil/Sxmo/) onto an Arch Arm barebones image. 
+Script to install [sxmo](https://sr.ht/~mil/Sxmo/) onto an [Arch Arm barebones image](https://github.com/dreemurrs-embedded/Pine64-Arch/releases). 
 If this script helps you then please consider buying me a coffee or two ;)
 
 <a href="https://www.buymeacoffee.com/JustineSmithies">Buy me a coffee</a>
