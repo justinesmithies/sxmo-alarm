@@ -6,6 +6,8 @@ If this script helps you then please consider buying me a coffee or two ;)
 
 ![ScreenShot](screenshot.jpg)
 
+The wallpaper is available [here](https://www.artstation.com/artwork/gJPLLx)
+
 ## To install and run:
 
 Copy sxmo-alarm somewhere in either the root of your home directory 
