@@ -17,4 +17,4 @@ chmod +x sxmo-alarm
 
 sudo ./sxmo-alarm from the directory that you installed it.
 
-I've also supplied my .Xresources ( Gives the yellow / black theme ), picom.cof and modified conky.conf to work with the transparency.
+I've also supplied my .Xresources ( Gives the yellow / black theme ), picom.conf and modified conky.conf to work with the transparency.
