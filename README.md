@@ -16,3 +16,5 @@ or some other directory under your home on your Pinephone and
 chmod +x sxmo-alarm
 
 sudo ./sxmo-alarm from the directory that you installed it.
+
+I've also supplied my .Xresources ( Gives the yellow / black theme ), picom.cof and modified conky.conf to work with the transparency.
