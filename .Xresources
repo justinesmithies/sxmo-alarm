@@ -1,0 +1,41 @@
+!========================================
+! Justines Custom Theme
+!========================================
+
+!--Colors and fonts----------------------
+
+!--#define teal1	#166873
+#define teal1		#000000
+#define white1	#defafe
+#define yellow1	#fefd5b
+!--#define ltteal1	#1e8f9e
+#define ltteal1      #000000
+#define font1 Inconsolata Nerd Font:style=Regular
+
+!--dmenu settings------------------------
+
+dmenu.font: font1:size=24
+! Normal 
+dmenu.foreground: white1
+dmenu.background: teal1
+! Current active item
+dmenu.selforeground: teal1
+dmenu.selbackground: yellow1
+!Letters matching search string
+dmenu.highlightforeground: teal1
+dmenu.highlightbackground: yellow1
+!Letters matching search string while item is active
+dmenu.selhighlightforeground: teal1
+dmenu.selhighlightbackground: white1
+!Selected entries with Ctrl-Enter
+dmenu.outforeground: teal1
+dmenu.outbackground: white1
+
+!--dwm settings------------------------
+
+dwm.font: font1:size=14
+
+dwm.foreground: white1
+dwm.background: ltteal1
+dwm.selforeground: teal1
+dwm.selbackground: yellow
