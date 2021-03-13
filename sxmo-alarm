@@ -33,7 +33,7 @@ fi
 # Commands that need to be ran with root would be invoked without sudo
 # root-command
 
-sudo -u alarm mkdir -p build-sxmo-dev || exit 1
+sudo -u $real_user mkdir -p build-sxmo-dev || exit 1
 
 cd build-sxmo-dev || exit 1
 
@@ -54,9 +54,9 @@ if pacman -Qs yay ; then
 	echo "Yay is already installed.">&2
 else
 	echo "Installing yay.">&2
-	sudo -u alarm git clone https://aur.archlinux.org/yay-bin.git
+	sudo -u $real_user git clone https://aur.archlinux.org/yay-bin.git
 	cd yay-bin
-	sudo -u alarm makepkg -s --noconfirm
+	sudo -u $real_user makepkg -s --noconfirm
 	pacman -U --noconfirm yay-bin-*
 	cd ..
 fi
@@ -67,9 +67,9 @@ echo "Installing Nerd fonts.">&2
 if pacman -Qs nerd-fonts-hack ; then
 	echo "Nerd fonts is already installed.">&2
 else
-	sudo -u alarm git clone https://aur.archlinux.org/nerd-fonts-hack.git
+	sudo -u $real_user git clone https://aur.archlinux.org/nerd-fonts-hack.git
 	cd nerd-fonts-hack
-	sudo -u alarm makepkg -s --noconfirm
+	sudo -u $real_user makepkg -s --noconfirm
 	pacman -U --noconfirm nerd-fonts-hack-*
 	cd ..
 fi
@@ -80,10 +80,10 @@ echo "Installing sfeed.">&2
 if pacman -Qs sfeed ; then
 	echo "Sfeed is already installed.">&2
 else
-	sudo -u alarm git clone https://aur.archlinux.org/sfeed-git.git
+	sudo -u $real_user git clone https://aur.archlinux.org/sfeed-git.git
 	cd sfeed-git
 	sed -i "s@arch=('i686' 'x86_64' 'armv6h' 'armv7h')@arch=('i686' 'x86_64' 'armv6h' 'armv7h' 'aarch64')@g" PKGBUILD
-	sudo -u alarm makepkg -s --noconfirm
+	sudo -u $real_user makepkg -s --noconfirm
 	pacman -U --noconfirm --overwrite="*" sfeed-git-*
 	cd ..
 fi
