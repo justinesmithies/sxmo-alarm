@@ -159,9 +159,15 @@ cd .. || exit 1
 
 # Move config files into correct directories for Arch Arm
 
+if [ ! -f "/etc/X11/xdm/Xsession" ]; then
 ln -s /usr/lib/X11/xdm/Xsession /etc/X11/xdm/
+fi
+if [ ! -f "/etc/X11/xdm/Xsetup_0" ]; then
 ln -s /usr/lib/X11/xdm/Xsetup_0 /etc/X11/xdm/
+fi
+if [ ! -f "/etc/X11/xdm/GiveConsole" ]; then
 ln -s /usr/lib/X11/xdm/GiveConsole /etc/X11/xdm/
+fi
 
 # Housekeeping
 
@@ -180,4 +186,5 @@ sed -i 's@sudo apk upgrade@yay -Syu@g' /usr/bin/sxmo_upgrade.sh
 
 echo "Finished please reboot your Pinephone.">&2
 exit 0
+
 
