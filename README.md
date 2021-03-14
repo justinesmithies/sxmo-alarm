@@ -25,6 +25,6 @@ I've also supplied my .Xresources ( Gives the yellow / black theme ), picom.conf
 
 Also if you do use picom for transparency then it will severely impact the performance of the Megapixels camera to the point of unuseability. Not sure of a workaround as yet ?
 
-## User Manual
+## User Manual:
 
 The user manual is located [here](https://git.sr.ht/~mil/sxmo-docs/tree/master/USERGUIDE.md)
