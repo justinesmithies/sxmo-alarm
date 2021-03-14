@@ -20,3 +20,7 @@ sudo ./sxmo-alarm from the directory that you installed it.
 Note: Running this script periodically will update sxmo from git.
 
 I've also supplied my .Xresources ( Gives the yellow / black theme ), picom.conf and modified conky.conf to work with the transparency.
+
+## User Manual
+
+The user manual is located [here](https://git.sr.ht/~mil/sxmo-docs/tree/master/USERGUIDE.md)
