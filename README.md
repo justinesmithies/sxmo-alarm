@@ -17,4 +17,6 @@ chmod +x sxmo-alarm
 
 sudo ./sxmo-alarm from the directory that you installed it.
 
+Note: Running this script periodically will update sxmo from their git.
+
 I've also supplied my .Xresources ( Gives the yellow / black theme ), picom.conf and modified conky.conf to work with the transparency.
