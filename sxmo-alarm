@@ -61,16 +61,16 @@ else
 	cd ..
 fi
 
-# Install Nerd fonts from AUR
+# Install Nerd fonts Fira Mono from AUR
 
 echo "Installing Nerd fonts.">&2
-if pacman -Qs nerd-fonts-hack ; then
+if pacman -Qs nerd-fonts-fira-mono ; then
 	echo "Nerd fonts is already installed.">&2
 else
-	sudo -u $real_user git clone https://aur.archlinux.org/nerd-fonts-hack.git
-	cd nerd-fonts-hack
+	sudo -u $real_user git clone https://aur.archlinux.org/nerd-fonts-fira-mono.git
+	cd nerd-fonts-fira-mono
 	sudo -u $real_user makepkg -s --noconfirm
-	pacman -U --noconfirm nerd-fonts-hack-*
+	pacman -U --noconfirm nerd-fonts-fira-mono-*
 	cd ..
 fi
 
@@ -98,7 +98,7 @@ if [ ! -f /etc/systemd/system/sxmo-pinephone.service ]; then
 Description=sxmo-pinephone
 
 [Service]
-ExecStart=/usr/bin/chmod -R a+rw /sys/module/8723cs/parameters/rtw_scan_interval_thr /sys/devices/platform/backlight/backlight/backlight/brightness /sys/power/state /sys/devices/platform/soc/1f00000.rtc/power/wakeup /sys/power/mem_sleep /sys/bus/usb/drivers/usb/unbind /sys/bus/usb/drivers/usb/bind /sys/class/leds/red:indicator/brightness /sys/class/leds/blue:indicator/brightness /sys/class/leds/green:indicator/brightness /sys/class/leds/white:flash/brightness /dev/rtc0 /sys/devices/platform/soc/1f03400.rsb/sunxi-rsb-3a3/axp221-pek/power/wakeup /sys/class/wakeup/
+ExecStart=/usr/bin/sxmo_setpermissions.sh
 
 [Install]
 WantedBy=multi-user.target
