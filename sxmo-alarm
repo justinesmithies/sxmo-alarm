@@ -183,7 +183,7 @@ sed -i 's@sudo apk upgrade@yay -Syu@g' /usr/bin/sxmo_upgrade.sh
 
 sed -i 's@sudo setup-timezone -z@sudo timedatectl set-timezone@g' /usr/bin/sxmo_timezonechange.sh
 
-# Create required files in users directory
+# Create required directories in users directory
 
 sudo -u $real_user mkdir -p /home/$real_user/.config/sxmo
 sudo -u $real_user mkdir -p /home/$real_user/.config/sxmo/userscripts
