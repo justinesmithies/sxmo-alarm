@@ -123,7 +123,7 @@ fi
 
 # Fetch and build required SXMO packages
 
-repos="~mil/sxmo-utils ~mil/sxmo-dwm ~mil/sxmo-dmenu ~mil/lisgd ~mil/sxmo-surf ~mil/sxmo-st ~proycon/svkbd ~proycon/clickclack ~mil/sxmo-xdm-config"
+repos="~mil/sxmo-utils ~mil/sxmo-dwm ~mil/sxmo-dmenu ~mil/lisgd ~mil/sxmo-surf ~mil/sxmo-st ~proycon/svkbd ~mil/sxmo-xdm-config"
 
 for repo in $repos; do
 	echo "Obtaining $repo...">&2
@@ -163,6 +163,7 @@ cd .. || exit 1
 cp /usr/lib/X11/xdm/Xsession /etc/X11/xdm/
 cp /usr/lib/X11/xdm/Xsetup_0 /etc/X11/xdm/
 cp /usr/lib/X11/xdm/GiveConsole /etc/X11/xdm/
+cp /usr/share/X11/xorg.conf.d/90-monitor.conf /etc/X11/xorg.conf.d/
 
 # Housekeeping
 
