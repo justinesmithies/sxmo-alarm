@@ -25,6 +25,12 @@ I've also supplied my .Xresources ( Gives the yellow / black theme ), picom.conf
 
 Also if you do use picom for transparency then it will severely impact the performance of the Megapixels camera to the point of unuseability. Not sure of a workaround as yet ?
 
+If you'd like feedback on keypresses then put this line in your ~/.profile
+
+export KEYBOARD_ARGS="-o | clickclack -V -f wavfile.wav"
+
+Remove the -f and filename if you just want vibration. More details on clickclack are [here](https://git.sr.ht/~proycon/clickclack)
+
 ## User Manual:
 
 The user manual is located [here](https://git.sr.ht/~mil/sxmo-docs/tree/master/USERGUIDE.md)
