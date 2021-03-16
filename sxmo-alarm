@@ -123,7 +123,7 @@ fi
 
 # Fetch and build required SXMO packages
 
-repos="~mil/sxmo-utils ~mil/sxmo-dwm ~mil/sxmo-dmenu ~mil/lisgd ~mil/sxmo-surf ~mil/sxmo-st ~proycon/svkbd ~mil/sxmo-xdm-config"
+repos="~mil/sxmo-utils ~mil/sxmo-dwm ~mil/sxmo-dmenu ~mil/lisgd ~mil/sxmo-surf ~mil/sxmo-st ~proycon/svkbd ~proycon/clickclack ~mil/sxmo-xdm-config"
 
 for repo in $repos; do
 	echo "Obtaining $repo...">&2
