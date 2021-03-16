@@ -33,7 +33,7 @@ Remove the -f and filename if you just want vibration. More details on clickclac
 
 ## Issues
 
-Firefox sets layout.css.devPixelsPerPx set to -1.0 on Arch for some reason which cause it to display too big.
+Firefox sets layout.css.devPixelsPerPx set to -1.0 on Arch for some reason which causes it to display too big and off screen.
 To resolve this type about:config in the url bar and search for layout.css.devPixelsPerPx then change it to 1.0
 
 
