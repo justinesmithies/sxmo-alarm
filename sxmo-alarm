@@ -46,7 +46,7 @@ echo "Installing build dependencies.">&2
 pacman -S --needed --noconfirm --disable-download-timeout xorg-server libxft libxinerama webkit2gtk linux-headers fontconfig freetype2 libxext libinput ncurses base-devel git bc busybox  xdg-user-dirs
 pacman -S --needed --noconfirm --disable-download-timeout xcalib xorg-xrandr xorg-xsetroot xorg-xdm xorg-xmodmap xorg-xset xorg-xprop xdotool xsel xorg-xinput xorg-xcalc xclip xf86-input-synaptics xf86-video-fbdev xorg-xdpyinfo
 pacman -S --needed --noconfirm --disable-download-timeout ttf-dejavu alsa-utils autocutsel inotify-tools sxiv vis pulseaudio pulseaudio-alsa conky megapixels feh dunst modemmanager ffmpeg geoclue mediainfo
-pacman -S --needed --noconfirm --disable-download-timeout firefox terminus-font highlight xcursor-themes youtube-dl screen mpv dnsmasq sdl2 bluez bluez-utils
+pacman -S --needed --noconfirm --disable-download-timeout firefox mobile-config-firefox terminus-font highlight xcursor-themes youtube-dl screen mpv dnsmasq sdl2 bluez bluez-utils
 
 # Build and install yay from AUR
 
