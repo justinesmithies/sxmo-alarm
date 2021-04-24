@@ -31,12 +31,6 @@ export KEYBOARD_ARGS="-o | clickclack -V -f wavfile.wav"
 
 Remove the -f and filename if you just want vibration. More details on clickclack are [here](https://git.sr.ht/~proycon/clickclack)
 
-## Issues
-
-Firefox sets layout.css.devPixelsPerPx set to -1.0 on Arch for some reason which causes it to display too big and off screen.
-To resolve this type about:config in the url bar and search for layout.css.devPixelsPerPx then change it to 1.0
-
-
 ## User Manual:
 
 The user manual is located [here](https://git.sr.ht/~mil/sxmo-docs/tree/master/USERGUIDE.md)
