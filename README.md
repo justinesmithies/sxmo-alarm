@@ -29,8 +29,10 @@ Also if you do use picom for transparency then it will severely impact the perfo
 
 If you'd like feedback on keypresses then put this line in your ~/.profile
 
+```sh
 export KEYBOARD_ARGS="-o | clickclack -V -f wavfile.wav"
 
+```
 Remove the -f and filename if you just want vibration. More details on clickclack are [here](https://git.sr.ht/~proycon/clickclack)
 
 ## User Manual:
