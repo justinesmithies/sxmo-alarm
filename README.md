@@ -13,9 +13,11 @@ The wallpaper is available [here](https://www.artstation.com/artwork/gJPLLx)
 Copy sxmo-alarm somewhere in either the root of your home directory 
 or some other directory under your home on your Pinephone and
 
+```sh
 chmod +x sxmo-alarm
 
 sudo ./sxmo-alarm from the directory that you installed it.
+```
 
 ## Notes: 
 
