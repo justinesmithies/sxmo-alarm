@@ -136,7 +136,6 @@ for repo in $repos; do
 		cd "$repodir" || exit 1
 	fi
 	echo "Building $repo...">&2
-	make clean
 	if [ -f config.def.h ] && [ -f config.h ]; then
 		cp -f config.def.h config.h
 	fi
