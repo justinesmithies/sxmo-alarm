@@ -43,7 +43,7 @@ pacman -Syu --noconfirm
 
 echo "Installing build dependencies.">&2
 
-pacman -S --needed --noconfirm --disable-download-timeout xorg-server libxft libxinerama webkit2gtk linux-headers fontconfig freetype2 libxext libinput ncurses base-devel git bc busybox  xdg-user-dirs
+pacman -S --needed --noconfirm --disable-download-timeout xorg-server libxft libxinerama webkit2gtk linux-headers fontconfig freetype2 libxext libinput ncurses base-devel git bc busybox  xdg-user-dirs cmake icu libphonenumber
 pacman -S --needed --noconfirm --disable-download-timeout xcalib xorg-xrandr xorg-xsetroot xorg-xdm xorg-xmodmap xorg-xset xorg-xprop xdotool xsel xorg-xinput xorg-xcalc xclip xf86-input-synaptics xf86-video-fbdev xorg-xdpyinfo
 pacman -S --needed --noconfirm --disable-download-timeout ttf-dejavu alsa-utils autocutsel inotify-tools sxiv vis pulseaudio pulseaudio-alsa conky megapixels feh dunst modemmanager ffmpeg geoclue mediainfo
 pacman -S --needed --noconfirm --disable-download-timeout firefox mobile-config-firefox terminus-font highlight xcursor-themes youtube-dl screen mpv dnsmasq sdl2 bluez bluez-utils
@@ -123,7 +123,7 @@ fi
 
 # Fetch and build required SXMO packages
 
-repos="~mil/sxmo-utils ~mil/sxmo-dwm ~mil/sxmo-dmenu ~mil/lisgd ~mil/sxmo-surf ~mil/sxmo-st ~proycon/svkbd ~proycon/clickclack ~mil/sxmo-xdm-config"
+repos="~mil/sxmo-utils ~mil/sxmo-dwm ~mil/sxmo-dmenu ~mil/lisgd ~mil/sxmo-surf ~mil/sxmo-st ~proycon/svkbd ~proycon/clickclack ~mil/sxmo-xdm-config Orange-OpenSource/pn"
 
 for repo in $repos; do
 	echo "Obtaining $repo...">&2
@@ -132,7 +132,7 @@ for repo in $repos; do
 		cd "$repodir" || exit 1
 		git pull --ff-only || exit 1
 	else
-		git clone "https://git.sr.ht/$repo" || exit 1
+		git clone "https://git.sr.ht/$repo" || git clone "https://github.com/$repo" || exit 1
 		cd "$repodir" || exit 1
 	fi
 	echo "Building $repo...">&2
