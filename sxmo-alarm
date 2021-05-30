@@ -139,6 +139,7 @@ for repo in $repos; do
 	if [ -f config.def.h ] && [ -f config.h ]; then
 		cp -f config.def.h config.h
 	fi
+	make || cmake -DCMAKE_INSTALL_PREFIX=/usr . && make . || exit 1
 	sudo make PREFIX=/usr install || exit 1
 	if [ "$repo" = "~mil/sxmo-utils" ]; then
         systemctl enable sxmo-pinephone.service
