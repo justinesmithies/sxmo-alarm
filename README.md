@@ -41,14 +41,14 @@ Remove the -f and filename if you just want vibration. More details on clickclac
 
 If yay-bin and pacman are giving you greif since recent updates try the following which should fix the issues:
 
-...
+```
 sudo pacman -R yay-bin
 sudo pacman -Syyuu
 rm -Rfv ~/yay-bin
 git clone https://aur.archlinux.org/yay-bin.git
 cd yay-bin
 makepkg -si
-...
+```
 
 ## User Manual:
 
