@@ -39,7 +39,7 @@ Remove the -f and filename if you just want vibration. More details on clickclac
 
 ## Issues:
 
-If yay-bin and pacman are giving you greif since recent updates try the following which should fix the issues:
+If yay-bin and pacman are giving you grief since recent updates try the following which should fix the issues:
 
 ```
 sudo pacman -R yay-bin
