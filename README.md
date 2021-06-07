@@ -37,6 +37,7 @@ export KEYBOARD_ARGS="-o | clickclack -V -f wavfile.wav"
 ```
 Remove the -f and filename if you just want vibration. More details on clickclack are [here](https://git.sr.ht/~proycon/clickclack)
 
+
 ## Issues:
 
 If yay-bin and pacman are giving you grief since recent updates try the following which should fix the issues:
@@ -49,6 +50,7 @@ git clone https://aur.archlinux.org/yay-bin.git
 cd yay-bin
 makepkg -si
 ```
+If your /etc/pacman.conf gets overwritten I have included a copy of my pacman.conf that enables parallel downloads and some eyecandy for updates.
 
 ## User Manual:
 
