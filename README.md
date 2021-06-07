@@ -37,6 +37,19 @@ export KEYBOARD_ARGS="-o | clickclack -V -f wavfile.wav"
 ```
 Remove the -f and filename if you just want vibration. More details on clickclack are [here](https://git.sr.ht/~proycon/clickclack)
 
+## Issues:
+
+If yay-bin and pacman are giving you greif since recent updates try the following which should fix the issues:
+
+...
+sudo pacman -R yay-bin
+sudo pacman -Syyuu
+rm -Rfv ~/yay-bin
+git clone https://aur.archlinux.org/yay-bin.git
+cd yay-bin
+makepkg -si
+...
+
 ## User Manual:
 
 The user manual is located [here](https://git.sr.ht/~mil/sxmo-docs/tree/master/USERGUIDE.md)
