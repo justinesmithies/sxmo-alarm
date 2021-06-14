@@ -136,7 +136,7 @@ for repo in $repos; do
 		cd "$repodir" || exit 1
 	fi
 	echo "Building $repo...">&2
-	if [ -f config.def.h ] && [ -f config.h ]; then
+	if [ -f config.def.h ] && [ ! -f config.h ]; then
 		cp -f config.def.h config.h
 	fi
 	make || cmake -DCMAKE_INSTALL_PREFIX=/usr . && make . || exit 1
