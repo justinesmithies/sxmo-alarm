@@ -43,7 +43,7 @@ pacman -Syu --noconfirm
 
 echo "Installing build dependencies.">&2
 
-pacman -S --needed --noconfirm --disable-download-timeout xorg-server libxft libxinerama webkit2gtk linux-headers fontconfig freetype2 libxext libinput ncurses base-devel git bc busybox  xdg-user-dirs cmake icu libphonenumber
+pacman -S --needed --noconfirm --disable-download-timeout xorg-server libxft libxinerama webkit2gtk linux-headers fontconfig freetype2 libxext libinput ncurses base-devel git bc busybox  xdg-user-dirs cmake icu libphonenumber go
 pacman -S --needed --noconfirm --disable-download-timeout xcalib xorg-xrandr xorg-xsetroot xorg-xdm xorg-xmodmap xorg-xset xorg-xprop xdotool xsel xorg-xinput xorg-xcalc xclip xf86-input-synaptics xf86-video-fbdev xorg-xdpyinfo
 pacman -S --needed --noconfirm --disable-download-timeout ttf-dejavu alsa-utils autocutsel inotify-tools sxiv vis pulseaudio pulseaudio-alsa conky megapixels feh dunst modemmanager ffmpeg geoclue mediainfo
 pacman -S --needed --noconfirm --disable-download-timeout firefox mobile-config-firefox terminus-font highlight xcursor-themes youtube-dl screen mpv dnsmasq sdl2 bluez bluez-utils scrot
@@ -123,7 +123,7 @@ fi
 
 # Fetch and build required SXMO packages
 
-repos="~mil/sxmo-utils ~mil/sxmo-dwm ~mil/sxmo-dmenu ~mil/lisgd ~mil/sxmo-surf ~mil/sxmo-st ~proycon/svkbd ~proycon/clickclack ~mil/sxmo-xdm-config Orange-OpenSource/pn"
+repos="~mil/sxmo-utils ~mil/sxmo-dwm ~mil/sxmo-dmenu ~mil/lisgd ~mil/sxmo-surf ~mil/sxmo-st ~proycon/svkbd ~proycon/clickclack ~mil/sxmo-xdm-config Orange-OpenSource/pn ~anjan/mnc"
 
 for repo in $repos; do
 	echo "Obtaining $repo...">&2
@@ -139,8 +139,13 @@ for repo in $repos; do
 	if [ -f config.def.h ] && [ ! -f config.h ]; then
 		cp -f config.def.h config.h
 	fi
-	make || cmake -DCMAKE_INSTALL_PREFIX=/usr . && make . || exit 1
-	sudo make PREFIX=/usr install || exit 1
+	if [ "$repo" = "~anjan/mnc" ]; then
+		go build mnc.go || exit 1
+		sudo cp -f mnc /usr/bin || exit 1
+	else
+		make || cmake -DCMAKE_INSTALL_PREFIX=/usr . && make . || exit 1
+		sudo make PREFIX=/usr install || exit 1
+	fi
 	if [ "$repo" = "~mil/sxmo-utils" ]; then
         systemctl enable sxmo-pinephone.service
 	elif [ "$repo" = "~mil/sxmo-xdm-config" ]; then
