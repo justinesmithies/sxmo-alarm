@@ -61,6 +61,17 @@ else
 	cd ..
 fi
 
+# Install Fira Mono fonts                                                                                                                                                                   
+mkdir -p /usr/share/fonts/OTF                                                                                                                                                               
+sudo -u $real_user mkdir -p /home/$real_user/build-sxmo-dev/FiraMono                                                                                                                        
+cd /home/$real_user/build-sxmo-dev/FiraMono                                                                                                                                                 
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraMono.zip                                                                                                          
+sudo -u $real_user unzip -o FiraMono.zip                                                                                                                                                    
+cp -f *.otf /usr/share/fonts/OTF                                                                                                                                                            
+sudo -u $real_user fc-cache                                                                                                                                                                 
+rm *.zip                                                                                                                                                                                    
+cd /home/$real_user/build-sxmo-dev
+
 # Install sfeed from AUR
 
 echo "Installing sfeed.">&2
