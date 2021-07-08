@@ -61,19 +61,6 @@ else
 	cd ..
 fi
 
-# Install Nerd fonts Fira Mono from AUR
-
-echo "Installing Nerd fonts.">&2
-if pacman -Qs nerd-fonts-fira-mono ; then
-	echo "Nerd fonts is already installed.">&2
-else
-	sudo -u $real_user git clone https://aur.archlinux.org/nerd-fonts-fira-mono.git
-	cd nerd-fonts-fira-mono
-	sudo -u $real_user makepkg -s --noconfirm
-	pacman -U --noconfirm nerd-fonts-fira-mono-*
-	cd ..
-fi
-
 # Install sfeed from AUR
 
 echo "Installing sfeed.">&2
