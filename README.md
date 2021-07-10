@@ -17,8 +17,24 @@ Then from the directory that you installed it.
 
 ```sh
 chmod +x sxmo-alarm
+```
 
+Then to install leaving the config.h.def files intact each time it's run
+
+```
 sudo ./sxmo-alarm
+```
+
+Or you can force overwriting the config.h.def files
+
+```
+sudo ./sxmo-alarm --force
+```
+
+This just displays the options available
+
+```
+sudo ./sxmo-alarm --help
 ```
 
 ## Notes: 
