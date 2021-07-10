@@ -8,13 +8,24 @@
 # Copy sxmo-alarm somewhere in either the root of your home directory 
 # or some other directory under your home on your Pinephone and
 # chmod +x sxmo-alarm
-# sudo ./sxmo-alarm from the directory that you installed it.
+# sudo ./sxmo-alarm from the directory that you installed it which will leave config.h.def files intact.
+# Or sudo ./sxmo-alarm --force if you want to overwrite old config.h files.
 #
 # Justine Smithies - 27-02-2021
 
 if ! [ $(id -u) = 0 ]; then
    echo "The script needs to be run as root." >&2
    exit 1
+fi
+
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+	echo "Usage: sxmo-alarm [options]">&2
+	echo "Options: --force    Overwrite existing config.h">&2
+	exit 0
+elif [ "$1" = "-f" ] || [ "$1" = "--force" ]; then
+	FORCE=1
+else
+	FORCE=0
 fi
 
 if [ $SUDO_USER ]; then
@@ -134,8 +145,12 @@ for repo in $repos; do
 		cd "$repodir" || exit 1
 	fi
 	echo "Building $repo...">&2
-	if [ -f config.def.h ] && [ ! -f config.h ]; then
-		cp -f config.def.h config.h
+	if [ -f config.def.h ]; then
+		if [ $FORCE -eq 1 ] || [ ! -f config.h ]; then
+			cp -f config.def.h config.h
+		else
+			echo "(leaving old config.h untouched, this could lead to errors: run sudo ./sxmo-alarm --force if you want to overwrite old config.h files)">&2
+		fi
 	fi
 	if [ "$repo" = "~anjan/mnc" ]; then
 		go build mnc.go || exit 1
