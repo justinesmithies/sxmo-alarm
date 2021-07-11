@@ -1,5 +1,6 @@
 # sxmo-alarm
-Script to install [sxmo](https://sr.ht/~mil/Sxmo/) onto an [Arch Arm barebones image](https://github.com/dreemurrs-embedded/Pine64-Arch/releases). 
+Script to install [sxmo](https://sr.ht/~mil/Sxmo/) onto an [Arch Arm barebones image](https://github.com/dreemurrs-embedded/Pine64-Arch/releases).
+Or you could first use [Danct12 full disk encryption](https://github.com/dreemurrs-embedded/archarm-mobile-fde-installer) to install the barebones image to either eMMC or sdcard.
 If this script helps you then please consider buying me a coffee or two ;)
 
 <a href="https://www.buymeacoffee.com/JustineSmithies">Buy me a coffee</a>
